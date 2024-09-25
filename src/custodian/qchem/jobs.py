@@ -298,14 +298,14 @@ class QCJob(Job):
             )
 
             freq_outdata = QCOutput(output_file + ".freq_pre").data
-            if freq_outdata["version"] == "6":
-                opt_set = OptSet(molecule=freq_outdata["initial_molecule"], qchem_version=freq_outdata["version"])
-                opt_geom_opt = copy.deepcopy(opt_set.geom_opt)
+            # if freq_outdata["version"] == "6":
+            #     opt_set = OptSet(molecule=freq_outdata["initial_molecule"], qchem_version=freq_outdata["version"])
+            #     opt_geom_opt = copy.deepcopy(opt_set.geom_opt)
 
             if linked:
                 opt_rem["geom_opt_hessian"] = "read"
-                if freq_outdata["version"] == "6":
-                    opt_geom_opt["initial_hessian"] = "read"
+                # if freq_outdata["version"] == "6":
+                #     opt_geom_opt["initial_hessian"] = "read"
 
             tmp_opt_rem = copy.deepcopy(opt_rem)
             if opt_rem["scf_algorithm"] == "diis":
@@ -344,9 +344,9 @@ class QCJob(Job):
                 )
                 opt_outdata = QCOutput(f"{output_file}.{opt_method}_{ii}").data
                 opt_indata = QCInput.from_file(f"{input_file}.{opt_method}_{ii}")
-                if opt_outdata["version"] == "6":
-                    opt_geom_opt = copy.deepcopy(opt_indata.geom_opt)
-                    opt_geom_opt["initial_hessian"] = "read"
+                # if opt_outdata["version"] == "6":
+                #     opt_geom_opt = copy.deepcopy(opt_indata.geom_opt)
+                #     opt_geom_opt["initial_hessian"] = "read"
                 for key in opt_indata.rem:
                     if key not in {"job_type", "geom_opt2", "scf_guess_always"}:
                         if freq_rem.get(key, None) != opt_indata.rem[key] and "geom_opt" not in key:
